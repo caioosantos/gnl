@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:06:10 by cbrito-s          #+#    #+#             */
-/*   Updated: 2024/11/11 16:35:45 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:58:00 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,9 @@ int	ft_strlen(const char *str)
 	int	len;
 
 	len = 0;
-	while (*str != '\0')
+	while (str[len] != '\0')
 		len++;
 	return (len);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s != '\0')
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (0);
 }
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -49,6 +36,26 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	while (total)
 		dest[--total] = 0;
 	return ((void *)dest);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	int		len;
+	char	*str;
+
+	len = ft_strlen(s);
+	str = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
 
 char	*ft_strjoin(const char *s1, const char *s2)
@@ -69,8 +76,32 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		i++;
 	}
 	j = 0;
-	while (s2[j] != '\0' && i < len)
+	while (s2[j] != '\0')
 		dest[i++] = s2[j++];
 	dest[i] = '\0';
 	return (dest);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	size;
+	char	*sub;
+	size_t	i;
+
+	size = ft_strlen(s);
+	if (start >= size)
+		return (ft_strdup(""));
+	if (size - start < len)
+		len = size - start;
+	sub = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!sub)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[len] = '\0';
+	return (sub);
 }

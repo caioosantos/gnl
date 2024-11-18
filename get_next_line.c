@@ -35,51 +35,54 @@ static char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-static char	*get_line_tail(char *line)
+char	*get_line_tail(char *buf)
 {
 	int		b_read;
 	char	*tail;
 
 	b_read = 0;
-	while (line[b_read] != '\n' && line[b_read] != '\0')
+	while (buf[b_read] != '\n' && buf[b_read] != '\0')
 		b_read++;
-	if (line[b_read] == '\n')
+	if (buf[b_read] == '\n')
 		b_read++;
-	if (line[b_read] == '\0')
-		return (NULL);
-	tail = ft_strdup(line + b_read);
-	line[b_read] = '\0';
+	if (buf[b_read] == '\0')
+		tail = NULL;
+	else
+	{
+		tail = ft_strdup(buf + b_read);
+		buf[b_read] = '\0';
+	}
 	return (tail);
 }
 
-static char	*get_line(int fd, char *buffer)
+char	*get_line(int fd, char *buf, char *tail)
 {
-	ssize_t	buffer_size;
+	ssize_t	buf_size;
 	char	*temp;
-	char	*rest;
 
-	rest = ft_strdup(buffer);
-	buffer_size = 1;
-	while (buffer_size > 0)
+	while (1)
 	{
-		buffer_size = read(fd, buffer, BUFFER_SIZE);
-		if (buffer_size < 0)
-			return (NULL);
-		if (buffer_size == 0)
+		buf_size = read(fd, buf, BUFFER_SIZE);
+		if (buf_size == -1)
+			return (free_buffer(&tail));
+		if (buf_size == 0)
 			break ;
-		buffer[buffer_size] = '\0';
-		temp = rest;
-		rest = ft_strjoin(temp, buffer);
+		buf[buf_size] = '\0';
+		if (!tail)
+			tail = ft_strdup("");
+		temp = tail;
+		tail = ft_strjoin(temp, buf);
 		free_buffer(&temp);
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr(buf, '\n'))
 			break ;
 	}
-	return (rest);
+	return (tail);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*tail;
+	char		*buffer;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -87,9 +90,10 @@ char	*get_next_line(int fd)
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
-	line = get_line(fd, buffer);
+	line = get_line(fd, buffer, tail);
+	free_buffer(&buffer);
 	if (!line)
-		return (free_buffer(&buffer));
-	buffer = get_line_tail(line);
+		return (free_buffer(&tail));
+	tail = get_line_tail(line);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:36:45 by cbrito-s          #+#    #+#             */
-/*   Updated: 2024/11/18 14:31:01 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:00:15 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ static char	*get_line_tail(char *buf)
 	if (buf[b_read] == '\n')
 		b_read++;
 	if (buf[b_read] == '\0')
-		tail = NULL;
-	else
-	{
-		tail = ft_strdup(buf + b_read);
-		buf[b_read] = '\0';
-	}
+		return (NULL);
+	tail = ft_strdup(buf + b_read);
+	buf[b_read] = '\0';
 	return (tail);
 }
 

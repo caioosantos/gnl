@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 18:07:30 by cbrito-s          #+#    #+#             */
-/*   Updated: 2024/11/18 15:50:38 by cbrito-s         ###   ########.fr       */
+/*   Created: 2024/11/18 13:37:30 by cbrito-s          #+#    #+#             */
+/*   Updated: 2024/11/18 14:21:05 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <stdint.h>
@@ -19,6 +19,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
+# endif
+
+# ifndef ARR_FD
+#  define ARR_FD 42
 # endif
 
 char	*get_next_line(int fd);

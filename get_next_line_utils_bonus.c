@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 18:06:10 by cbrito-s          #+#    #+#             */
-/*   Updated: 2024/11/18 15:50:15 by cbrito-s         ###   ########.fr       */
+/*   Created: 2024/11/18 13:38:04 by cbrito-s          #+#    #+#             */
+/*   Updated: 2024/11/18 13:41:37 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(const char *str)
 {
